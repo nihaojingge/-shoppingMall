@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>全网搜索</title>
+	<meta charset="utf-8" />
+	<meta id="viewport" name="viewport" content="user-scalable=no">
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="telephone=no,email=no">
+	<meta http-equiv="Expires" CONTENT="0">
+	<meta http-equiv="Cache-Control" CONTENT="no-cache">
+	<meta http-equiv="Pragma" CONTENT="no-cache">
+	<meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+	<meta name="viewport" content=" user-scalable=no">
+	<meta name="HandheldFriendly" content="true"><!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
+	<meta name="x5-orientation" content="portrait"><!--QQ强制竖屏 -->
+	<meta name="full-screen" content="yes"><!-- UC强制全屏 -->
+	<meta name="x5-fullscreen" content="true"><!-- QQ强制全屏 -->
+	<meta name="browsermode" content="application"><!-- UC应用模式 -->
+	<meta name="x5-page-mode" content="app"><!-- QQ应用模式 -->
+	<meta name="msapplication-tap-highlight" content="no"><!-- windows phone 点击无高光 -->
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/corrected-mall.css" />
+	<style>
+	</style>
+	<script>
+        var view_num = window.screen.availWidth / 750;
+        document.getElementById("viewport").setAttribute('content', 'user-scalable=no, width=750, minimum-scale=' + view_num + ', initial-scale=' + view_num + ', maximum-scale=' + view_num + '');
+	</script>
+</head>
+<body>
+<div class="search-all">
+	<div class="search-input ">
+		<form action="javascript:return true;" style="display:inline-block;">
+			<!--<div contenteditable="true" id="search-inputs"></div>-->
+			<input  type="search" name="search" id="search-input" placeholder=""    onkeydown="if(event.keyCode==32) return false"/>
+		</form>
+		<img src="picture/paizhaosousuo@2x.png" alt="" class="search-seach-text-img2">
+		<input  accept="image/*" type="file" name="file" id="pic" class="search-seach-text-img2" style="opacity: 0;width: 4.4rem;height: 4.4rem"  >
+		<span id="search-search">搜索</span>
+	</div>
+	<!--历史搜索,历史搜索!-->
+	<div class="classify-show-left search-show-left">
+		<div class="search-show-left-bottom search-show-left-top">
+			<p class="search-show-left-top-p">
+				<img src="picture/search@2x.png" class="search-show-left-top-p-img1"/>
+				<span class="search-show-left-top-p-span">历史搜索</span>
+				<img src="picture/laji.png" alt="" class="search-show-left-top-img2">
+			</p>
+			<p class="search-show-left-top-history" style="width:67rem;"></p>
+		</div>
+		<div class="search-show-left-bottom">
+			<p class="search-show-left-top-p">
+				<img src="picture/ic_s_14.png" class="search-show-left-top-p-img1"/>
+				<span class="search-show-left-top-p-span">热门搜索</span>
+			</p>
+			<p class="search-show-left-bottom-hot" style="width:65rem;"></p>
+		</div>
+	</div>
+	<!--文字搜索提示-->
+	<div class="seach-text-search" style="display: none">
+	<!--<p class="seach-text-search-p" ><span class="seach-text-search-p-span1">111111111</span><img src="picture/xuanzhong.png" alt="" class="seach-text-search-p-img"></p>-->
+		<!--<p class="seach-text-search-p" >-->
+			<!--<span class="seach-text-search-p-span1">111111111</span>-->
+			<!--<span class="seach-text-search-p-span2">-->
+				<!--<span class="seach-text-search-p-span2-span">大衣</span>-->
+				<!--<span class="seach-text-search-p-span2-span">大衣</span>-->
+				<!--<span class="seach-text-search-p-span2-span">大衣</span>-->
+			<!--</span>-->
+			<!--<img src="picture/xuanzhong.png" alt="" class="seach-text-search-p-img">-->
+		<!--</p>-->
+
+	</div>
+	<!--等待动画-->
+	<div id="target" style=" width: 30rem;height: 30rem;position: fixed;bottom: 20rem;left: 22rem;z-index: 9999;display: none"></div>
+
+</div>
+<script src="js/jweixin-1.2.0.js"></script>
+<script src="js/share.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/allnetapi.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/adaptation.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/allnetmodel.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/spin.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/vconsole.min.js"></script>
+<script src="js/selfsupport.js" type="text/javascript" charset="utf-8"></script>
+ <!--<script src="js/addrefereecode.js" type="text/javascript" charset="utf-8"></script>-->
+<script>
+    //	<!--onkeyup="this.value=this.value.replace(/\s+/g,'')" 解决android输入框输入空格问题，但是在苹果上会出现文字不能连续输入得问题 onkeydown="if(event.keyCode==32) return false"-->
+    var ua = navigator.userAgent.toLowerCase();
+    if(/android/.test(ua)) {
+        $("#search-input").on("keyup",function(){
+            this.value=this.value.replace(/\s+/g,'')
+        })
+    }
+    img_search($("#pic"));
+    $(function() {
+        //点击删除图标
+        $(".search-input-ic_a06").on("click", function() {
+            $("#search-input").val("")
+        });
+        //点击删除历史搜索img
+        $(".search-show-left-top-img2").on("click",function () {
+            $("#search-input").val("");
+            $(".search-show-left-top").hide();
+            window.localStorage.removeItem ("over");
+            window.sessionStorage.removeItem ("NewVal1");
+            start();
+            popular();
+        });
+        // 点击搜索
+        $("#search-search").on("click", function() {
+            search();
+        });
+        //搜索文字提示
+        $("#search-input").bind('input change',function () {
+            var texts = $(this).val();
+//            console.log(texts);
+            texts = texts.replace(/(^\s*)|(\s*$)/g, "");
+//            console.log(texts);
+            if(texts){
+                $(".search-seach-text-img2").hide();
+                $(".seach-text-search").show();
+                var html=``;
+                dayu.api.complete(texts,function (result) {
+                    var product= dayu.models.complete(result)
+                    console.log(product);
+                    var html=``;
+                    for(var a=0;a<product.length;a++){
+                        html+=`<p class="seach-text-search-p" >
+									<span class="seach-text-search-p-span1">${product[a].value}</span>
+									<span class="seach-text-search-p-span2">`
+                        if(product[a].attrs != undefined){
+                            for (var c=0;c<product[a].attrs.length;c++) {
+                                html+=`<span class="seach-text-search-p-span2-span">${product[a].attrs[c]}</span>`;
+                                if (c==2){break}
+                            }
+                        }
+                        html+=`	</span>
+									<img src="picture/xuanzhong.png" alt="" class="seach-text-search-p-img">
+								</p> `
+                        if(a==9){break}
+                    }
+                    $(".seach-text-search").html(html);
+                    // // 点标签
+                    // $(".seach-text-search-p-span2-span").on("click",function () {
+                    //  var b=$(this).text();
+                    //  var s = $(this).parent().siblings(".seach-text-search-p-span1").text();
+                    //
+                    //  var shows = s+" "+b;
+                    //  console.log(shows);
+                    //      var over=window.localStorage.getItem("over");
+                    //      if(over == null || over == undefined){
+                    //          window.localStorage.setItem("over",shows);
+                    //      }else{
+                    //          over = shows+","+over;
+                    //          window.localStorage.setItem("over",over);
+                    //      }
+                    //
+                    //      window.sessionStorage.setItem("NewVal1",shows);
+                    //      $("#search-input").val("");
+                    //      window.location = "newsearch.html?val=" + shows;
+                    //  })
+                    // //点文字
+                    // $(".seach-text-search-p-span1").on("click",function () {
+                    //     var val1 = $(this).text();
+                    //     var over=window.localStorage.getItem("over");
+                    //     if(over == null || over == undefined){
+                    //         window.localStorage.setItem("over",val1);
+                    // }else{
+                    //         over = val1+","+over;
+                    //         window.localStorage.setItem("over",over);
+                    // }
+                    //
+                    //     window.sessionStorage.setItem("NewVal1",val1);
+                    //     $("#search-input").val("");
+                    //     window.location = "newsearch.html?val=" + val1;
+                    // });
+                    // //点箭头
+                    // $(".seach-text-search-p-img").on("click",function () {
+                    //     var val2 = $(this).parent().find(".seach-text-search-p-span1").text();
+                    //     $("#search-input").val(val2)
+                    // })
+                    // 点击事件代理
+                    $(".seach-text-search-p").on("click",function (event) {
+                        var event = event||window.event;
+                        var e = event.target;
+                        //点箭头
+                        if($(e).attr("class") == "seach-text-search-p-img" ){
+                            var val2 = $(e).parent().find(".seach-text-search-p-span1").text();
+                            console.log(val2)
+                            $("#search-input").val(val2)
+                        }else if($(e).attr("class") == "seach-text-search-p-span2-span"){
+                            // 点标签
+                            var b=$(e).text();
+                            var s = $(e).parent().siblings(".seach-text-search-p-span1").text();
+
+                            var shows = s+" "+b;
+                            console.log(shows);
+                            var over=window.localStorage.getItem("over");
+                            if(over == null || over == undefined){
+                                window.localStorage.setItem("over",shows);
+                            }else{
+                                over = shows+","+over;
+                                window.localStorage.setItem("over",over);
+                            }
+
+                            window.sessionStorage.setItem("NewVal1",shows);
+                            $("#search-input").val("");
+                            window.location = "newsearch.html?val=" + shows;
+                        }else{
+                            var val1 = $(this).find(".seach-text-search-p-span1").text();
+                            console.log(val1)
+                            var over=window.localStorage.getItem("over");
+                            if(over == null || over == undefined){
+                                window.localStorage.setItem("over",val1);
+                            }else{
+                                over = val1+","+over;
+                                window.localStorage.setItem("over",over);
+                            }
+                            window.sessionStorage.setItem("NewVal1",val1);
+                            $("#search-input").val("");
+                            window.location = "newsearch.html?val=" + val1;
+                        }
+                    })
+                })
+            }else{
+                $(".seach-text-search").hide();
+                $(".search-seach-text-img2").show();
+            }
+
+        });
+
+        $(document).keydown(function(event){
+            if(event.keyCode == 13) {
+                search();
+                return false;//阻止回车之后的页面刷新而使得搜索的事件读不到
+            }
+        });
+
+        $("#search-input").bind('input change',function () {
+            var val=$(this).val();
+            // alert("空"+val)
+            var popularText=sessionStorage.getItem("placeholder");
+            if(val==""){
+                $("#search-input").attr("placeholder",popularText);
+            }
+        });
+
+
+        function search(){
+            var val = $("#search-input").val();
+            //alert(val);
+            var over=window.localStorage.getItem("over");
+            var placeholder = window.sessionStorage.getItem("placeholder");
+            if(over == null || over == undefined){
+                if(val == undefined || val == null || val == "" || val =="undefined" || val == "null"){
+//					$("#search-input").attr("placeholder",placeholder);
+                    val=placeholder;
+                }
+                window.localStorage.setItem("over",val);
+                window.sessionStorage.setItem("NewVal1",val);
+                $("#search-input").val("");
+                window.location = "newsearch.html?val=" + val;
+
+            }else{
+
+                if(val == undefined || val == null || val == "" || val =="undefined" || val == "null"){
+                    over = placeholder+","+over;
+                    // var placeholderText= $("#search-input").attr("placeholder");
+                    val=placeholder;
+                    window.localStorage.setItem("over",over);
+                }else{
+                    over = val+","+over;
+                    window.localStorage.setItem("over",over);
+                }
+                $("#search-input").val("");
+                window.sessionStorage.setItem("NewVal1",val);
+                window.location = "newsearch.html?val=" + val;
+            }
+        }
+        // 判断有无历史搜索
+        function start() {
+            iosNorefresh();
+            var over=window.localStorage.getItem("over");
+//            alert(over);
+//            无历史搜索
+            if(over == null){
+                $(".search-show-left-top").hide();
+                //			点击搜索进入下一页
+                var val = $("#search-input").val();
+//                alert(val);
+                $("#search-search").on("click", function() {
+                    if(val == undefined || val == null || val == "" || val =="undefined" || val == "null"){
+                        // alert("初次为空",val);
+                        var placeholderText= $("#search-input").attr("placeholder");
+                        placeholderText=placeholderText;
+                        window.localStorage.setItem("over",placeholderText);
+                        window.sessionStorage.setItem("NewVal1",placeholderText);
+                        window.location = "newsearch.html?val=" + placeholderText;
+                    }else{
+                        //alert("不为空:"+val);
+                        window.localStorage.setItem("over",val);
+                        window.sessionStorage.setItem("NewVal1",val);
+                        window.location = "newsearch.html?val=" + val;
+                    }
+                })
+            }else{//有历史搜索
+                $(".search-show-left-top").show();
+                var  list = over.split(",");
+                // console.log(list);
+                function rep2(arr) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr.indexOf(arr[i]) != i) {
+                            arr.splice(i,1);//删除数组元素后数组长度减1后面的元素前移
+                            i--;//数组下标回退
+                        }
+                    }
+                    return arr;
+                }
+                //					  历史搜索
+                $(".search-show-left-top-history").empty();
+                var list = rep2(list);
+                for(var f in list){
+//                    console.log(list[f]);
+                    if(f>9){
+                        break;
+                    }else{
+                        var span1 = $("<span class='search-show-left-bottom-hot-span-text'>"+list[f]+"</span>");
+
+                        $(".search-show-left-top-history").append(span1);
+                    }
+                };
+                for(var i = 0; i < $(".search-show-left-bottom-hot-span-text").length; i++) {
+                    $(".search-show-left-bottom-hot-span-text").eq(i).on("click", function() {
+//                        							  $("#search-input").val($(this).text());
+                        var val = $(this).text();
+                        over = val+","+over;
+                        window.localStorage.setItem("over",over);
+                        window.sessionStorage.setItem("NewVal1",val);
+                        window.location = "newsearch.html?val=" + val;
+
+                    })
+                }
+
+            }
+        }
+        start();
+        //数组去重
+        function unique1(array){
+            var n = []; //一个新的临时数组
+            for(var i = 0; i < array.length; i++){
+                if (n.indexOf(array[i]) == -1) n.push(array[i]);
+            }
+            return n;
+        }
+
+        //            热门搜索
+        function popular() {
+            $.ajax({
+                type: "post",
+                url: "/whole/popular-text",
+				data:{type:1},
+                async: true,
+                success: function(data) {
+                    if(data.state == 0){
+                        console.log("热门搜索",data);
+                        $(".search-show-left-bottom-hot").empty();
+                        var over=window.localStorage.getItem("over");
+                        var newVal = window.sessionStorage.getItem("NewVal1");
+                        var prop = document.referrer;
+                        var bool = prop.indexOf("newsearch");
+                        if(newVal == undefined || newVal == null || newVal == ""){
+//                            alert("1"+data.data.popularText)
+                            $("#search-input").attr("placeholder",data.data.popularText);
+                            window.sessionStorage.setItem("placeholder",data.data.popularText)
+                        }else{
+//                            alert("2"+data.data.popularText)
+                            $("#search-input").attr("placeholder",data.data.popularText);
+                            window.sessionStorage.setItem("placeholder",data.data.popularText)
+                            $("#search-input").val(newVal);
+                            console.log($("#search-input").val())
+                            $(".search-seach-text-img2").hide();
+                        }
+
+                        for(var a = 0; a < data.data.texts.length; a++) {
+                            var str = "";
+                            str += "<span class='search-show-left-bottom-hot-span-text'>" + data.data.texts[a] + "</span>";
+                            $(".search-show-left-bottom-hot").append(str)
+                        }
+                        for(var i = 0; i < $(".search-show-left-bottom-hot span").length; i++) {
+                            $(".search-show-left-bottom-hot span").eq(i).on("click", function() {
+                                var val =$(this).text();
+                                if(over == null){
+                                    window.localStorage.setItem("over",val);
+
+                                    window.sessionStorage.setItem("NewVal1",val);
+                                    window.location = "newsearch.html?val=" + val;
+                                }else{
+                                    over = val+","+over;
+                                    window.localStorage.setItem("over",over);
+                                    window.sessionStorage.setItem("NewVal1",val);
+                                    window.location = "newsearch.html?val=" + val;
+                                }
+
+                            })
+                        }
+                    }else{
+                        $(".search-show-left-bottom").hide();
+                    }
+
+                },
+                error: function() {
+                    console.log(data)
+                }
+            });
+        }
+        popular()
+        //调用分享获取身份认证
+        rank();
+        //调用ready，保证回来的先后数据一致
+        wx.ready(function () {
+            share("大鱼优品—拍一下·比比价","全网优质商品搜索推荐平台，汇聚国内及海外精品，实现多、快、好、省的全网搜索推荐购物体验",dyyp.DOMAIN+"/search.html?random="+new Date().toLocaleTimeString(),dyyp.DOMAIN+"/img/new.jpg")
+        });
+//        var vConsole = new VConsole();
+    })
+</script>
+<!--腾讯统计-->
+<script src="js/count.js"></script>
+</body>
+
+</html>

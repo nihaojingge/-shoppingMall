@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="imagetoolbar" content="no">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<!-- uc强制竖屏 -->
+		<meta name="screen-orientation" content="portrait">
+		<!-- QQ强制竖屏 -->
+		<meta name="x5-orientation" content="portrait">
+		<!-- UC强制全屏 -->
+		<meta name="full-screen" content="yes">
+		<!-- QQ强制全屏 -->
+		<meta name="x5-fullscreen" content="true">
+		<!-- UC应用模式 -->
+		<meta name="browsermode" content="application">
+		<!-- QQ应用模式 -->
+		<meta name="x5-page-mode" content="app">
+		<!-- windows phone 点击无高光 -->
+		<meta name="msapplication-tap-highlight" content="no">
+
+		<meta http-equiv="Expires" CONTENT="0">
+		<meta http-equiv="Cache-Control" CONTENT="no-cache">
+		<meta http-equiv="Pragma" CONTENT="no-cache">
+
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<title>详情</title>
+		<link rel="stylesheet" type="text/css" href="css/community.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<!--获取微信权限,引入WX的js-->
+		<script src="js/jweixin-1.2.0.js"></script>
+		<script src="js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+	</head>
+
+	<body>
+		<div class="postint-all">
+			<header>
+				<img src="picture/ic_06.png" class="postint-header-back" onclick="javascript:history.back(-1)" />
+				<span>详情</span>
+			</header>
+            <div class="black" style="display: none;"></div>
+			<div class="postint-a">
+
+				<div class="postint-shows"></div>
+				<div class="postint-middle">
+					<p class="postint-middle-p-span">人点赞</p>
+					<p class='postint-middle-p'>
+						<span class="postint-span-overhiddle"></span>
+						<img src="picture/morezan.png" class="postint-middle-morezana" style="display: none;" />
+					</p>
+				</div>
+				<div class="postint-bottom">
+					<p class="postint-bottom-p1"></p>
+					<div class="postint-bottom-bottom"></div>
+				</div>
+			</div>
+            <!--蒙版-->
+			<div class="postint-model" style="position: fixed;top: 0;left: 0;z-index: 30;background: rgba(0,0,0,0.5);display: none">
+				<!--//弹框-->
+				<div class="postion-hight" >
+					<p class="postion-hight-a">回复</p>
+					<p class="postion-hight-b">举报</p>
+					<p class="postion-hight-c" style="color: #fd6363">取消</p>
+				</div>
+				<!--举报-->
+				<div class="postion-report" style="display: none">
+					<p class="postion-report-a">色情或违法信息</p>
+					<p class="postion-report-a">广告信息</p>
+					<p class="postion-report-a">谩骂骚扰</p>
+					<p class="postion-report-a">其他</p>
+					<p class="postion-hight-c" style="color: #fd6363">取消</p>
+				</div>
+			</div>
+            <!--信息提示框-->
+			<div class="postint-message" style="width:20rem;height: 3rem;background: black;color: white;text-align: center;line-height: 3rem;position: fixed;bottom: 15%;left: 6rem;z-index: 44;font-size: 1.4rem;border-radius: 0.7rem;display: none"></div>
+			<!--确认是否删除-->
+			<div class="postint-model-del" style="position: fixed;top: 0;left: 0;z-index: 30;background: rgba(0,0,0,0.5);display: none">
+				<div class="postint-dele" style="display: none;">
+					<p>是否确认删除?</p>
+					<p>
+						<span class="postint-dele-a" style="color: blue;border-right: 0.1rem solid #F3F3F3">取消</span> <span class="postint-dele-b" style="color: #fd6363">确认</span>
+					</p>
+				</div>
+			</div>
+
+
+			<footer class="postint-footer">
+				<input type="text" name="" id="postint-footer-input" placeholder="添加评论" maxlength="140" />
+				<span class="postint-footer-span" style="display: none;">发布</span>
+				<img src="picture/zanh.png" class="postint-footer-img postint-footer-fox" />
+			</footer>
+			<footer class="postint-footera" style="display:none;">
+				<input type="text" name="" id="postint-footer-inputa" placeholder="添加回复..." maxlength="140" />
+				<span class="postint-footer-spana">回复</span>
+			</footer>
+		</div>
+	</body>
+	<script src="js/commed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/commedui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/postint.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

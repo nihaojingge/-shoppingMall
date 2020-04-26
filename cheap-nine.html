@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.9包邮</title>
+    <meta name="viewport" content=" user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/corrected-mall.css" />
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.clone.css" />
+    <!--获取微信权限,引入WX的js-->
+    <script src="js/jweixin-1.2.0.js"></script>
+    <script src="js/share.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="nine-all">
+    <!--标题-->
+    <header class="cheap-header">
+        <span class="cheap-header-span">9.9包邮</span>
+        <img src="picture/ic_h5_003.png" alt="" class="cheap-header-img" onclick="javascript:history.back(-1)">
+    </header>
+    <div class="nine-box">
+        <!--<div class="nine-box-div">-->
+            <!--<img src="picture/ooooo.png" alt="" class="nine-box-div-img">-->
+            <!--<div class="nine-box-div-box">-->
+                <!--<div class="nine-box-div-div">-->
+                    <!--<img src="picture/taobao@2x.png" alt="" class="nine-box-div-div-img">-->
+                    <!--<span class="nine-box-div-div-span">你看你看才能才能查看内存看出的扩充内存内存卡才能打开才能得出可能多吃亏你上次口咯噢噢噢噢噢噢噢噢噢噢噢噢</span>-->
+                <!--</div>-->
+                <!--<p class="nine-box-div-p2">-->
+                    <!--<span class="nine-box-div-p2-span1">到手价:</span>-->
+                    <!--<span class="nine-box-div-p2-span2">￥123</span>-->
+                    <!--<span class="nine-box-div-p2-span3"><s>￥123</s></span>-->
+                <!--</p>-->
+                <!--<p class="nine-box-div-p3">-->
+                    <!--<span class="nine-box-div-p3-span1">评论数1234</span>-->
+                    <!--<span class="nine-box-div-p3-span2">月销量123</span>-->
+                <!--</p>-->
+            <!--</div>-->
+            <!--后加佣金-->
+            <!--<div class="nine-box-yongjin-container">-->
+                <!--<span class="nine-box-yongjin-s1">2倍佣金中</span>-->
+                <!--<s class="nine-box-yongjin-s">￥59.9</s>-->
+                <!--<span class="nine-box-yongjin-s2">￥119.8</span>-->
+                <!--<img src="picture/fuzhi@2x.png" alt="">-->
+                <!--<span class="nine-box-yongjin-s3">复制</span>-->
+                <!--<img src="picture/xiazainine.png" alt="">-->
+                <!--<span class="nine-box-yongjin-s3">下载</span>-->
+                <!--<img class="nine-box-yongjin-img" src="picture/weixiny@2x.png" alt="">-->
+                <!--<img class="nine-box-yongjin-img" src="picture/pengyouquangy.png" alt="">-->
+                <!--<img class="nine-box-yongjin-img" src="picture/qqy@2x.png" alt="">-->
+                <!--<img class="nine-box-yongjin-img" src="picture/weiboy@2x.png" alt="">-->
+            <!--</div>-->
+        </div>
+
+        <!--返回顶部-->
+        <img src="picture/back.png" alt="" class="back">
+    </div>
+</div>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/selfsupport.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+<script src="js/commedui.js" type="text/javascript" charset="utf-8" ></script>
+<script src="js/allnetapi.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/allnetmodel.js" type="text/javascript" charset="utf-8"></script>
+ <!--<script src="js/addrefereecode.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript">
+    //调用分享获取身份认证
+    rank();
+    function commonShare(type){
+        //调用分享接口
+        $.ajax({
+            url:"/me/getShare",
+            type: "post",
+            data:{type:type},
+            success: function(result) {
+                console.log(result);
+                if(result.state==0) {
+                    //console.log.log(result.data.title)
+                    //调用ready，保证回来的先后数据一致
+                    wx.ready(function () {
+                        share(result.data.title,result.data.describe,result.data.url,result.data.image);
+                    });
+                }
+            },
+            error:function(e){
+                //console.log.log(e);
+            }
+        });
+    }
+    commonShare("25");
+    var pageId = 1;
+    var bool = true;
+    var timer;
+    function  shows(){
+        bool=false;
+        dayu.api.productPostageIsFree(pageId,function (data) {
+                console.log(data);
+                if(data.state == 0){
+                    var arrs = data.data;
+                    var products = new dayu.models.productPostageIsFree(arrs);
+                    console.log("商品列表",products);
+                    for (var d = 0;d<products.items.length;d++){
+                        var str=``;
+                        str += `
+                                <div class="nine-box-div" data-id="${products.items[d].id}">
+                                <div class="nine-box-div-div" data-id="${products.items[d].id}">
+                                    <img src="picture/${products.items[d].coverimage}" alt="" class="nine-box-div-img" onerror="this.onerror=null; this.src='images/ooooo.png'">
+                                    <div class="nine-box-div-box">
+                                        <div class="nine-box-div-div-right">
+                                            <img src="picture/${products.items[d].pfrom}" alt="" class="nine-box-div-div-img">
+                                            <span class="nine-box-div-div-span">${products.items[d].title}</span>
+                                        </div>`;
+
+                        // 副标题
+                        if(products.items[d].shortTitle!=""&&products.items[d].shortTitle!=null){
+                            str+=`<div class="nine-shortTitle">${products.items[d].shortTitle}</div>`;
+                        }else{
+                            str+=`<div class="nine-shortTitle">&nbsp;</div>`;
+                        }
+                        //金币
+                        if(products.items[d].returnIcons!=undefined){
+                            str+=`<div class="nine-returnIcons">金币+${products.items[d].returnIcons}</div>`;
+                        }else{
+                            str+=`<div class="nine-returnIcons" style="background:#ffffff">&nbsp;</div>`;
+                        }
+
+                        str+=`<div class="nine-box-div-p2">`;
+                        if(products.items[d].price!=undefined){
+                            str+=`<span class="nine-box-div-p2-span1">原价￥${products.items[d].price}</span>`;
+                        }else{
+                            str+=`<span class="nine-box-div-p2-span1">&nbsp;</span>`;
+                        }
+
+                        str+=`<span class="nine-box-div-p3-span2">月销${products.items[d].sales}</span>
+                                            </div>`;
+                        str+=`<div class="nine-nowPrice-box">`
+
+                        if(products.items[d].displayType == 1) {//券
+                            str+=`<span class="nine-nowPrice">券后价 ￥${products.items[d].nowPrice}</span>`;
+                            str+=`<span class="nine-type-img-quan"> ${products.items[d].displayContent}</span>`;
+                        }else if(products.items[d].displayType ==2)  {//折
+                            str+=`<span class="nine-nowPrice">折后价 ￥${products.items[d].nowPrice}</span>`;
+                            str+=`<span class="nine-type-img-zhe"> ${products.items[d].displayContent}</span>`;
+                        }else if(products.items[d].displayType ==3){//返
+                            str+=`<span class="nine-nowPrice">返后价 ￥${products.items[d].nowPrice}</span>`;
+                            str+=`<span class="nine-type-img">返 ${products.items[d].displayContent}</span>`;
+                        }else if(products.items[d].displayType ==4){//普通
+                            str+=`<span class="nine-nowPrice">现价 ￥${products.items[d].nowPrice}</span>`;
+                        }
+
+                        str+=`</div>`;
+                        str+=`</div>
+                                        </div>`;
+                        //佣金
+                        if(products.items[d].commission!=undefined){
+                            str+=`<div class="nine-box-yongjin-container">
+                                            <span class="nine-box-yongjin-s1" style="color:#333333;font-size:2.4rem;font-family: PingFangSC-Regular">佣金</span>
+                                            <!--<s class="nine-box-yongjin-s">￥59.9</s>-->
+                                            <span class="nine-box-yongjin-s2" style="color:#da2f25;font-size:4rem;font-family: DINCcondensed-Bold;margin-right:6rem;">￥${products.items[d].commission}</span>
+                                            <img src="picture/fuzhi@2x.png" class="spreader-download-app" alt="">
+                                            <!--<span class="nine-box-yongjin-s3 spreader-download-app">复制</span>-->
+                                            <img src="picture/xiazainine.png" class="spreader-download-app" alt="">
+                                            <!--<span class="nine-box-yongjin-s3 spreader-download-app">下载</span>-->
+                                            <img class="nine-box-yongjin-img spreader-download-app" src="picture/weixiny@2x.png" alt="">
+                                            <img class="nine-box-yongjin-img spreader-download-app" src="picture/pengyouquangy.png" alt="">
+                                            <img class="nine-box-yongjin-img spreader-download-app" src="picture/qqy@2x.png" alt="">
+                                            <img class="nine-box-yongjin-img spreader-download-app" src="picture/weiboy@2x.png" alt="" style="margin-right:0;">
+                                        </div>`;
+                        }
+                        str+=`</div>`;
+
+                        $(".nine-box").append(str);
+                    }
+                    $(".nine-box-div-div").on("click",function () {
+                        MtaH5.clickStat("011");
+                        window.location="networkProductDetaile.html?id="+$(this).attr("data-id")
+                    });
+                    //下载APP 佣金
+                    downLoadApp($(".spreader-download-app"));
+                    if(products.pageTotal>pageId) {
+                        pageId = products.pageId + 1;
+                        // console.log(page)
+                    } else {
+                        setInterval(function() {
+                            bool = false;
+                        }, 100);
+                        //显示已经到底了
+                        // $(".frist-bottom-box-none").show();
+                    }
+                }else{
+                    $(".nine-box").html("<div class='div-none'><img src='picture/xitongchucuo.png' alt='' class='div-none-img'><p class='div-none-p'>抱歉，暂无相关商品  ~   去看看其他活动吧</p><div>")
+                }
+
+            },
+            function(){
+                clearTimeout(timer);
+                timer = setTimeout(function() {
+                    bool = true;
+                }, 150);
+            },
+            function () {
+                console.log("系统错误");
+            });
+    }
+    function start() {
+        shows();
+        $(window).on('scroll', function() {
+
+            var maxHeight = Math.ceil($(window).scrollTop()+400);
+
+            // console.log(maxHeight,$(document).height(),$(window).height(),bool)
+            if(maxHeight >= $(document).height() - $(window).height()) {
+                if(bool == true) {
+                    shows();
+                }
+            }
+        })
+    }
+    start();
+</script>
+<!--腾讯统计-->
+<script src="js/count.js"></script>
+</body>
+
+</html>

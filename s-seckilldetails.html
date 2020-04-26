@@ -1,0 +1,967 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no">
+		<meta charset="UTF-8">
+		<meta http-equiv="imagetoolbar" content="no">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="telephone=no,email=no">
+		<meta http-equiv="Expires" CONTENT="0">
+		<meta http-equiv="Cache-Control" CONTENT="no-cache">
+		<meta http-equiv="Pragma" CONTENT="no-cache">
+		<meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+		<meta name="viewport" content="user-scalable=no">
+		<meta name="HandheldFriendly" content="true"><!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+		<meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
+		<meta name="x5-orientation" content="portrait"><!--QQ强制竖屏 -->
+		<meta name="full-screen" content="yes"><!-- UC强制全屏 -->
+		<meta name="x5-fullscreen" content="true"><!-- QQ强制全屏 -->
+		<meta name="browsermode" content="application"><!-- UC应用模式 -->
+		<meta name="x5-page-mode" content="app"><!-- QQ应用模式 -->
+		<meta name="msapplication-tap-highlight" content="no"><!-- windows phone 点击无高光 -->
+		<title>商品详情</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/selfsupport.css" />
+		<link rel="stylesheet" href="css/selfsplit.css">
+		<link rel="stylesheet" href="css/selfcut.css">
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iosselect.css"/>
+		<style>
+			/*<!--解决底部导航抖动-->*/
+			/*html, body {height:100%;overflow:auto;margin: 0;}*/
+			.productDetailImg-all{
+				width:75rem;
+				/*margin-bottom:10rem;*/
+			}
+			.productDetailImg-img{
+				width:75rem;
+				margin:0;
+				padding:0;
+			}
+			.productDetailImg-img img{
+				width:75rem;
+			}
+			.productDetailImg-all-model{
+				position:fixed;
+				top:0;
+				left:0;
+				z-index: 444;
+				background:#000000;
+				display:none;
+			}
+			.productDetailImg-all-model div{
+				width:75rem;
+				position:fixed;
+				top:50%;
+				left:50%;
+				transform:translate(-50%,-50%);
+			}
+			.productDetailImg-all-model div img{
+				width:75rem;
+			}
+			/*商品选择框*/
+			.seckilldetails-all-sizeNum{
+				width:72.2rem;
+				/*min-height:50rem;*/
+				padding-left:2.8rem;
+				padding-top:2.4rem;
+				background:#ffffff;
+				position:fixed;
+				bottom:-200rem;
+				left:0;
+				z-index:10;
+				/*height:0;*/
+				/*display:none;*/
+				border-radius: 0.8rem;
+				-webkit-transition: bottom 0.5s ease;
+			}
+			.parent{
+				padding-bottom:2rem;
+				width:72.2rem;
+				border-bottom:0.3rem solid #f3f3f3;
+			}
+			#shuxingshow{
+				display:inline-block;
+				/*position:relative;*/
+				/*top:3rem;*/
+				/*left:-9.2rem;*/
+				text-align: left;
+				width:47rem;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+			#shuxingshow span{
+				color:#444444;
+				font-size:3rem;
+			}
+			#shuxingshowparent{
+				width:72.2rem;
+			}
+			#shuxingshowparent div{
+				width:72.2rem;
+				border-bottom:0.3rem solid #f3f3f3;
+				margin-top:3rem;
+				padding-bottom:3rem;
+			}
+			#shuxingshowparent .guigename{
+				color:#444444;
+				font-size:2.8rem;
+				margin-bottom:2.8rem;
+			}
+			div.sizeshow .price span{
+				color:#fd6363;
+				font-size:3.6rem;
+			}
+			.seckilldetails-all-sizeNum  button{
+				padding:0.5rem 1.7rem;
+				font-size:2.4rem;
+				text-align: center;
+				color: #393939;
+				border-radius: 3rem;
+				background:#ececec;
+				margin-right:2.8rem;
+				margin-bottom:2rem;
+			}
+			#img{
+				margin-right:3.2rem;
+				margin-top: 2.4rem;
+				display:inline-block;
+			}
+			#img>img{
+				width: 20rem;
+				height: 20rem;
+				vertical-align: middle;
+				background: url(images/ooooo.png) no-repeat;
+				background-size:100%;
+			}
+			.price{
+				color: crimson;
+				font-size: 18px;
+				margin-bottom:1.5rem;
+			}
+			.sizeshow-container{
+				display:inline-block;
+				position: relative;
+				top:9rem;
+			}
+			.sizeshow{
+				vertical-align: middle;
+			}
+			button.select{
+				background-color: #fd6363;
+				color: #ffffff;
+			}
+			button.wu{
+				/*border: 1px solid transparent;*/
+				color:#999999;
+			}
+			.d-bottom button.d-bottom-wancheng{
+				background:#fd6363;
+			}
+			.seckilldetails-all-sizeNum .close{
+				position:absolute;
+				right:1.2rem;
+				top:1.4rem;
+			}
+			.seckilldetails-all-sizeNum .acti{
+				background: #ececec;
+				color:#999999;
+			}
+		</style>
+		<!--中英文JS替换-->
+		<script src="js/zh.js"></script>
+		<!--获取微信权限,引入WX的js-->
+		<script src="js/jweixin-1.2.0.js"></script>
+		<script src="js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+        <!--调试工具-->
+        <script src="js/vconsole.min.js"></script>
+	</head>
+	<body style="overflow-x: hidden">
+		<!--//--------页面最外层容器- 注意------------>
+		<div class="seckilldetails-all">
+			<!--轮播图-->
+			<div class="seckilldetails-top-img">
+				<div class="seckilldetails-top-img-box">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+							<!--<div class="swiper-slide"><img src="picture/1.jpg" /></div>-->
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+				<!--//返回按钮图片-->
+				<div class="seckilldetails-return" onClick="window.location='s-first.html'">
+					<img src="picture/cehua.png" alt="">
+				</div>
+
+
+
+				<!--2018.9.1新加需求开团提示-->
+				<!-- 文字滚动-->
+				<div class="product-top-gundong">
+					<div class="product-top-gundong-text">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<!--<div class="swiper-slide">-->
+									<!--<img src="picture/ooooo.png" alt="">-->
+									<!--<span>微笑**的猫</span>-->
+								<!--</div>-->
+								<!--<div class="swiper-slide">-->
+									<!--<img src="picture/ooooo.png" alt="">-->
+									<!--<span>爱哭**的猫</span>-->
+								<!--</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+            <!--//秒杀商品的框-->
+            <div class="seckilldetails-miaosha" style="display: none">
+                <!--<img src="picture/pinshouqibeijing.png" alt="">-->
+                <div class="seckilldetails-miaosha-txt">
+                    <!--价钱-->
+                    <div class="seckilldetails-miaosha-txt-price">
+                        <span class="seckilldetails-miaosha-txt-seckillGroupPrice"><b>&yen;</b></span>
+                        <span class="seckilldetails-miaosha-txt-groupprice"></span>
+                    </div>
+                    <!--已售多少-->
+                    <div class="seckilldetails-miaosha-txt-count">
+                        <p><s class="seckilldetails-miaosha-txt-count-yuanjia"></s></p>
+                        <p>
+                            <span class="seckilldetails-miaosha-txt-surplusStock">618</span>件已售
+                        </p>
+                    </div>
+                    <!--抢购结束时间-->
+                    <div class="seckilldetails-miaosha-txt-time">
+                        <!--<p>距结束时间：</p>-->
+                        <!--<p>-->
+                            <!--<span>12</span>-->
+                            <!--<b>：</b>-->
+                            <!--<span>12</span>-->
+                            <!--<b>：</b>-->
+                            <!--<span>12</span>-->
+                        <!--</p>-->
+                    </div>
+                </div>
+            </div>
+			<!-----------------------拼手气团框--------------------------------------------------->
+			<div class="seckilldetails-pinshouqi" style="display:none;">
+				<div class="seckilldetails-pinshouqi-price">
+					<span>&yen;</span>
+					<b></b>
+					<span class="seckilldetails-pinshouqi-name"></span>
+					<span class="seckilldetails-pinshouqi-stock"></span>
+				</div>
+				<div class="seckilldetails-pinshouqi-time">
+					<p>活动结束时间</p>
+					<p>
+						<span class="day" style="background:none;width:2rem;color:#ffffff"></span>
+						<b style="color:#ffffff;">天</b>
+						<span class="hours"></span>
+						<b>:</b>
+						<span class="minutes"></span>
+						<b>:</b>
+						<span class="seconds"></span>
+						<b></b>
+					</p>
+				</div>
+			</div>
+			<!--详情介绍部分-->
+			<div class="seckilldetails-details-text">
+				<h1>
+					<!--爷爷喝过的蜜&nbsp;清热美白刺儿槐蜜-->
+				</h1>
+				<p class="p3">
+					<!--蜂蜜都能怎么吃？踏青野餐的时候抹在面包上做果酱，烧烤的时候做酱油料腻，随时泡一杯凉茶，或者DIY一款点心....总之这么营养又方便随你发挥。爷爷喝过的蜜来自一个偏执的设计师天然酿造的需求，绿色养殖，酿造纯天然原蜜，没有任何添加。-->
+				</p>
+				<p class="p1">
+					<span class="s1">
+						<!--&yen;53.00-->
+					</span>
+					<span class="s2">
+						<!--<s>&yen;120</s>-->
+					</span>
+				</p>
+				<p class="p2">
+					<span class="start-back">
+						<!--<img src="picture/greestar@2x.png" alt="">-->
+						<!--<img src="picture/greestar@2x.png" alt="">-->
+						<!--<img src="picture/greestar@2x.png" alt="">-->
+						<!--<img src="picture/greestar@2x.png" alt="">-->
+						<!--<img src="picture/greestar@2x.png" alt="">-->
+						<b class="start-size"></b>
+					</span>
+					<!--分数-->
+					<span class="comment-score"></span>
+					<!--<span class="com-num">-->
+						<!--111人评价-->
+					<!--</span>-->
+					<!--<span class="sales">-->
+						<!--&lt;!&ndash;累计销量：410件&ndash;&gt;-->
+					<!--</span>-->
+					<span class="sales"></span>
+				</p>
+				<!--后加佣金-->
+				<div class="yongjincontainer" style="display: none">
+					<span class="nine-box-yongjin-s1"></span>
+					<s class="nine-box-yongjin-s"></s>
+					<span class="nine-box-yongjin-s2"></span>
+					<img src="picture/xiazainine.png" alt="" class="spreader-download-app">
+					<!--<span class="nine-box-yongjin-s3 spreader-download-app">下载</span>-->
+					<img src="picture/fuzhi@2x.png" alt="" class="spreader-download-app">
+					<!--<span class="nine-box-yongjin-s3 spreader-download-app">复制</span>-->
+					<img class="nine-box-yongjin-img nine-box-yongjin-xiangqingyeimg spreader-download-app" src="picture/weixiny@2x.png" alt="">
+					<img class="nine-box-yongjin-img nine-box-yongjin-xiangqingyeimg spreader-download-app" src="picture/pengyouquangy.png" alt="">
+					<img class="nine-box-yongjin-img nine-box-yongjin-xiangqingyeimg spreader-download-app" src="picture/weiboy@2x.png" alt="">
+					<img class="nine-box-yongjin-img nine-box-yongjin-xiangqingyeimg spreader-download-app" src="picture/qqy@2x.png" alt="">
+				</div>
+				<p class="p-line line-hide"></p>
+			</div>
+			<!--分割线-->
+			<!--<div class="line"></div>-->
+
+
+			<div class="line"></div>
+			<!--配送地址-->
+			<div class="seckilldetails-product-address">
+				<span class="seckilldetails-product-address-span1">配送至：</span>
+				<span class="seckilldetails-product-address-span2"></span>
+				<img src="picture/icon_go@2x.png" alt="">
+			</div>
+			<!--极速退款，7天退货部分-->
+			<div class="seckilldetails-tab">
+				<!--<p><img src="picture/duihao@2x.png" alt=""><span>极速退款</span></p>-->
+				<!--<p><img src="picture/duihao@2x.png" alt=""><span>七天退换</span></p>-->
+				<!--<p><img src="picture/duihao@2x.png" alt=""><span>24小时发货</span></p>-->
+				<!--<p><img src="picture/duihao@2x.png" alt=""><span>正品保证</span></p>-->
+			</div>
+			<div class="line"></div>
+			<!--2018.9.3新加参团提醒-->
+			<div class="seckilldetails-newGroup">
+				<!--title-->
+				<div class="seckilldetails-newGroup-title">
+					<img src="picture/goods detail_icon_nitice@2x.png" alt="">
+					<span>已有人参加</span>
+				</div>
+				<!--参团容器-->
+				<div class="seckilldetails-newGroup-container">
+					<!--1-->
+					<!--<div class="seckilldetails-newGroup-list">-->
+						<!--&lt;!&ndash;左&ndash;&gt;-->
+						<!--<div class="seckilldetails-newGroup-list-left">-->
+							<!--<img src="picture/ooooo.png" alt="">-->
+						<!--</div>-->
+						<!--&lt;!&ndash;右&ndash;&gt;-->
+						<!--<div class="seckilldetails-newGroup-list-right">-->
+							<!--&lt;!&ndash;name&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-name">-->
+								<!--毛毛的团-->
+							<!--</div>-->
+							<!--&lt;!&ndash;按钮&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-go">去参团</div>-->
+							<!--&lt;!&ndash;成团人数&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-people">-->
+								<!--<p class="seckilldetails-newGroup-list-right-people-p1">还差<b>1人</b>成团</p>-->
+								<!--<p class="seckilldetails-newGroup-list-right-time-start">-->
+									<!--<b>剩余</b>-->
+									<!--<span class="day">06</span>-->
+									<!--<b>:</b>-->
+									<!--<span class="hours">06</span>-->
+									<!--<b>:</b>-->
+									<!--<span class="minutes">06</span>-->
+									<!--<b>.</b>-->
+									<!--<span class="seconds">6</span>-->
+								<!--</p>-->
+							<!--</div>-->
+
+						<!--</div>-->
+					<!--</div>-->
+					<!--2-->
+					<!--<div class="seckilldetails-newGroup-list">-->
+						<!--&lt;!&ndash;左&ndash;&gt;-->
+						<!--<div class="seckilldetails-newGroup-list-left">-->
+							<!--<img src="picture/ooooo.png" alt="">-->
+						<!--</div>-->
+						<!--&lt;!&ndash;右&ndash;&gt;-->
+						<!--<div class="seckilldetails-newGroup-list-right">-->
+							<!--&lt;!&ndash;name&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-name">-->
+								<!--毛毛的团-->
+							<!--</div>-->
+							<!--&lt;!&ndash;按钮&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-go">去参团</div>-->
+							<!--&lt;!&ndash;成团人数&ndash;&gt;-->
+							<!--<div class="seckilldetails-newGroup-list-right-people">-->
+								<!--<p class="seckilldetails-newGroup-list-right-people-p1">还差<b>1人</b>成团</p>-->
+								<!--<p class="seckilldetails-newGroup-list-right-time-start">-->
+									<!--<b>剩余</b>-->
+									<!--<span class="day">06</span>-->
+									<!--<b>:</b>-->
+									<!--<span class="hours">06</span>-->
+									<!--<b>:</b>-->
+									<!--<span class="minutes">06</span>-->
+									<!--<b>.</b>-->
+									<!--<span class="seconds">6</span>-->
+								<!--</p>-->
+							<!--</div>-->
+
+						<!--</div>-->
+					<!--</div>-->
+				</div>
+			</div>
+
+
+			<!----------------------拼手气活动规则--------------------------------------------->
+			<div class="seckilldetails-active-rule" style="display:none;">
+				<div class="seckilldetails-active-rule-img">
+					<!--<img src="picture/activerule@2x.png" alt="">-->
+					活动规则
+				</div>
+				<div class="seckilldetails-active-rule-txt">
+					<p>
+						<!--手气团成团后，系统会从团成员红随机选取一位，作为幸运用户，此用户将获得手气团商品。-->
+					</p>
+					<!--<p>-->
+					<!--手气团成团后，系统会从团成员红随机选取一位，作为幸运用户，此用户将获得手气团商品。-->
+					<!--</p>-->
+				</div>
+			</div>
+			<!--产品参数-->
+			<!--<div class="seckilldetails-product-num">-->
+				<!--<div id="seckilldetails-product-num-1">-->
+					<!--<span>产品参数</span>-->
+					<!--<img src="picture/bigmore@2x.png" alt="">-->
+				<!--</div>-->
+				<!--<div id="seckilldetails-product-num-2">-->
+					<!--<span>请选择尺码</span>-->
+					<!--<img src="picture/bigmore@2x.png" alt="">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--1.4rem的线-->
+			<div class="seckilldetails-line seckilldetails-group-line"></div>
+			<!--评价晒单-->
+			<div class="seckilldetails-comment">
+				<p>
+					<span class="seckilldetails-comment-shai"></span>
+				</p>
+                <!--包评价的容器-->
+                <div class="seckilldetails-comment-comments">
+                    <!--第一块评价-->
+					<!--<div class="seckilldetails-comment-comments-1">-->
+						<!--<div class="seckilldetails-comment-comments-img">-->
+							<!--<img src="picture/ooooo.png" alt="">-->
+						<!--</div>-->
+						<!--<div class="com-user">-->
+							<!--<div class="com-user-niming">-->
+								<!--<span class="com-user-1">匿名用户</span>-->
+								<!--<span class="start-backs">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/greestar@2x.png" alt="">-->
+                                    <!--<b class="start-sizes"></b>-->
+								<!--</span>-->
+								<!--<span class="com-user-3">2017-04-05</span>-->
+							<!--</div>-->
+							<!--<div class="com-user-pingjia">很好喝，是买过味道最好的一家！</div>-->
+                            <!--<div class="com-user-img">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="com-user-sell-huifu">-->
+                                <!--<span>商家回复：</span>-->
+                                <!--<span>谢谢您的购买，欢迎再次光临小店～</span>-->
+                            <!--</div>-->
+                            <!--<div class="com-user-zhuiping">-->
+                                <!--<p class="com-user-zhuiping-1">用户当天追评</p>-->
+                                <!--<p class="com-user-pingjia">很好喝，是买过味道最好的一家</p>-->
+                                <!--<p class="com-user-img com-uesr-quborder">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="com-user-sell-huifu">-->
+                                <!--<span>商家回复：</span>-->
+                                <!--<span>谢谢您的购买，欢迎再次光临小店～</span>-->
+                            <!--</div>-->
+							<!--<div class="com-user-biaozhun">-->
+                                <!--<span>颜色：红</span>&nbsp;-->
+                                <!--<span>尺码：XXL</span>-->
+                            <!--</div>-->
+
+						<!--</div>-->
+					<!--</div>-->
+                    <!--第二块评价-->
+                    <!--<div class="seckilldetails-comment-comments-1">-->
+                        <!--<div class="seckilldetails-comment-comments-img">-->
+                            <!--<img src="picture/ooooo.png" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="com-user">-->
+                            <!--<div class="com-user-niming">-->
+                                <!--<span class="com-user-1">匿名用户</span>-->
+                                <!--<span class="start-backs">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/star@2x.png" alt="">-->
+									<!--<img src="picture/greestar@2x.png" alt="">-->
+                                    <!--<b class="start-sizes"></b>-->
+								<!--</span>-->
+                                <!--<span class="com-user-3">2017-04-05</span>-->
+                            <!--</div>-->
+                            <!--<div class="com-user-pingjia">很好喝，是买过味道最好的一家！</div>-->
+                            <!--<div class="com-user-img">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--<img src="picture/ooooo.png" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="com-user-zhuiping">-->
+                                <!--<p class="com-user-zhuiping-1">用户当天追评</p>-->
+                                <!--<p class="com-user-pingjia">很好喝，是买过味道最好的一家</p>-->
+                                <!--<p class="com-user-img com-uesr-quborder">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                    <!--<img src="picture/ooooo.png" alt="">-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="com-user-sell-huifu">-->
+                                <!--<span>商家回复：</span>-->
+                                <!--<span>谢谢您的购买，欢迎再次光临小店～</span>-->
+                            <!--</div>-->
+                            <!--<div class="com-user-biaozhun">-->
+                                <!--<span>颜色：红</span>&nbsp;-->
+                                <!--<span>尺码：XXL</span>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+			</div>
+			<!--全部评论-->
+			<div class="seckilldetails-comment-all">
+				<span class="all-comment">全部评论</span>
+				<!--<span>&gt;</span>-->
+			</div>
+			<!--1.4rem的线-->
+			<div class="seckilldetails-line"></div>
+			<!--店铺信息-->
+			<div class="seckilldetails-shop">
+				<p class="shop-img">
+					<img src="picture/s-shopicon.png" alt="" onerror="this.onerror=null; this.src='img/s-shopIcon.png'">
+				</p>
+				<p class="shop-name">
+					<!--//天向乐淘食品专营店-->
+				</p>
+				<p id="shops">
+					进店逛逛
+				</p>
+			</div>
+			<!--店铺推荐-->
+			<div class="seckilldetails-shop-show">
+				<div>
+					<!--<span></span>-->
+					<b>店铺推荐</b>
+					<!--<span></span>-->
+				</div>
+				<div class="shop-show">
+					<!--<dl>-->
+						<!--<dt><img src="picture/1.jpg" alt=""></dt>-->
+						<!--<dd class="pro-name">这是商品名称商品这是商品这是商品名</dd>-->
+						<!--<dd>-->
+							<!--<span>&yen;7666.00</span>-->
+							<!--<span>已售1000</span>-->
+						<!--</dd>-->
+					<!--</dl>-->
+					<!--<dl>-->
+						<!--<dt><img src="picture/1.jpg" alt=""></dt>-->
+						<!--<dd class="pro-name">这是商品名称商品这是商品这是商品名</dd>-->
+						<!--<dd>-->
+							<!--<span>&yen;7666.00</span>-->
+							<!--<span>已售1000</span>-->
+						<!--</dd>-->
+					<!--</dl>-->
+					<!--<dl>-->
+						<!--<dt><img src="picture/1.jpg" alt=""></dt>-->
+						<!--<dd class="pro-name">这是商品名称商品这是商品这是商品名</dd>-->
+						<!--<dd>-->
+							<!--<span>&yen;7666.00</span>-->
+							<!--<span>已售1000</span>-->
+						<!--</dd>-->
+					<!--</dl>-->
+				</div>
+			</div>
+			<!--产品介绍文字图形-->
+			<!--<div class="seckilldetails-product-detail">-->
+				<!--<img src="picture/detail.png" alt="">-->
+			<!--</div>-->
+			<!--图片提示-->
+			<div class="seckilldetails-product-detaile-tips-txt">
+				<div class="seckilldetails-product-detaile-tips-txt-line"></div>
+				<img src="picture/pic@2x.png" alt="">
+				<span>详情</span>
+				<div class="seckilldetails-product-detaile-tips-txt-line"></div>
+			</div>
+			<!--放图容器-->
+			<div class="productDetailImg-all">
+				<!--&lt;!&ndash;每张图&ndash;&gt;-->
+				<!--<div class="productDetailImg-img">-->
+				<!--<img src="picture/1.jpg" alt="">-->
+				<!--</div>-->
+				<!--&lt;!&ndash;每张图&ndash;&gt;-->
+				<!--<div class="productDetailImg-img">-->
+				<!--<img src="picture/c.jpg" alt="">-->
+				<!--</div>-->
+				<!--<div class="productDetailImg-img">-->
+				<!--<img src="picture/b.jpg" alt="">-->
+				<!--</div>-->
+				<!--<div class="productDetailImg-img">-->
+				<!--<img src="picture/c.jpg" alt="">-->
+				<!--</div>-->
+			</div>
+			<!--已经到底了-->
+			<div class="productDetailImg-bottom-tips">
+				<img src="picture/dayu_logo_gray@2x.png" alt="">
+				<span>已经到底喽～</span>
+			</div>
+			<div class="productDetailImg-all-model">
+				<div>
+					<img src="picture/1.jpg" alt="">
+				</div>
+			</div>
+
+			<!--底部-->
+			<div class="seckilldetails-bottom">
+				<div class="seckilldetails-bottom-left">
+					<dl class="seckilldetails-bottom-left-1" id="seckilldetails-bottom-left-11">
+						<dt><img src="picture/sy@2x.png" alt=""></dt>
+						<dd>店铺</dd>
+			       </dl>
+					<dl class="seckilldetails-bottom-left-1" onclick="NTKF.im_openInPageChat()" id="seckilldetails-bottom-left-12" style="position:relative;right:-1.2rem">
+						<dt><img src="picture/kf@2x.png" alt=""></dt>
+						<dd>客服</dd>
+					</dl>
+					<dl class="seckilldetails-bottom-left-1" id="seckilldetails-bottom-left-13">
+						<dt><img src="picture/sc@2x.png" alt=""></dt>
+						<dd>收藏</dd>
+					</dl>
+				</div>
+				<div class="seckilldetails-bottom-right">
+					<div id="seckilldetails-bottom-right-1">
+						<p class="sepprice">
+							<!--&yen;79-->
+						</p>
+						<p>单独购买</p>
+					</div>
+					<div id="seckilldetails-bottom-right-2">
+						<p class="group">
+							<!--&yen;53-->
+						</p>
+						<p></p>
+					</div>
+					<div class="seckilldetails-bottom-right-3" style="width:41rem;font-size:3.6rem;color:#999999;height:10rem;line-height:10rem;background:#dedede;padding:0;letter-spacing: 0.2rem;display:none">已售罄</div>
+				</div>
+			</div>
+			<!--点击返回底部-->
+			<img src="picture/back.png" alt="" class="back">
+		</div>
+		<!--遮挡页面外层容器的遮罩层-->
+		<div class="seckilldetails-all-model"></div>
+	   <!--产品参数弹出框-->
+		<div class="seckilldetails-all-productNum">
+			<h1>产品参数</h1>
+			<div class="seckilldetails-parameter">
+				<!--<div>-->
+					<!--<p>品牌</p>-->
+					<!--<p>老虎山土蜂蜜</p>-->
+				<!--</div>-->
+				<!--<div>-->
+					<!--<p>货号</p>-->
+					<!--<p>0100-39</p>-->
+				<!--</div>-->
+				<!--<div>-->
+					<!--<p>成分</p>-->
+					<!--<p>百花蜜</p>-->
+				<!--</div>-->
+				<!--<div>-->
+					<!--<p>适用人群</p>-->
+					<!--<p>老虎山土蜂蜜</p>-->
+				<!--</div>-->
+				<!--<div>-->
+					<!--<p>产地</p>-->
+					<!--<p>内蒙古赤峰市</p>-->
+				<!--</div>-->
+			</div>
+			<div class="d-bottom">
+				<button>完成</button>
+			</div>
+		</div>
+
+
+		<!--尺寸页弹出框-->
+		<!--<div class="seckilldetails-all-sizeNum">-->
+			<!--<div>-->
+				<!--<div id="type">-->
+					<!--&lt;!&ndash;第一块图片  选择&ndash;&gt;-->
+					<!--<div class="fi-d">-->
+						<!--<img src="picture/ooooo.png" alt="">-->
+						<!--<div>-->
+							<!--<p id="fi-d-price">&yen;53.00</p>-->
+							<!--<p>-->
+								<!--<span id="fi-d-size">请选择尺码，颜色</span>-->
+							<!--</p>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--&lt;!&ndash;第二块尺码&ndash;&gt;-->
+					<!--<div class="tw-d">-->
+						<!--<p>尺码</p>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">M</button>-->
+						<!--<button type="button">L</button>-->
+						<!--<button type="button">XL</button>-->
+						<!--<button type="button">XXL</button>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">S</button>-->
+						<!--<button type="button">S</button>-->
+					<!--</div>-->
+					<!--&lt;!&ndash;第三块 颜色&ndash;&gt;-->
+					<!--<div class="tw-d">-->
+						<!--<p>颜色</p>-->
+						<!--<button type="button">橡皮粉</button>-->
+						<!--<button type="button">暗驼色</button>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--&lt;!&ndash;&lt;!&ndash;第四块 数量&ndash;&gt;&ndash;&gt;-->
+				<!--<div class="fo-d">-->
+					<!--<p class="lf">数量</p>-->
+					<!--<div class="rt">-->
+						<!--<button id="minus">&minus;</button>-->
+						<!--<input id="counts" type="text" value="1">-->
+						<!--<button id="plus">&plus;</button>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--底部完成按钮&ndash;-->
+			<!--<div class="d-bottom size">-->
+				<!--<button class="d-bottom-wancheng">完成</button>-->
+			<!--</div>-->
+			<!--&lt;!&ndash;关闭按钮&ndash;&gt;-->
+			<!--<p class="close">-->
+				<!--<img src="picture/closea.png" alt="">-->
+			<!--</p>-->
+		<!--</div>-->
+
+
+		<div class="seckilldetails-all-sizeNum">
+			<!--<div class="parent">-->
+				<!--<div id="img" class="img"><img src="" alt=""/></div>-->
+				<!--<div class="sizeshow">-->
+					<!--<p class="price"><span>&yen;</span><span id="price"></span></p>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="d-bottom sizes">-->
+				<!--<button class="d-bottom-wancheng">完成</button>-->
+			<!--</div>-->
+			<!--&lt;!&ndash;第四块 数量&ndash;&gt;-->
+			<!--<div class="fo-d">-->
+				<!--<p class="lf">数量</p>-->
+				<!--<div class="rt">-->
+					<!--<button id="minus">&minus;</button>-->
+					<!--<input id="counts" type="text" value="1">-->
+					<!--<button id="plus">&plus;</button>-->
+				<!--</div>-->
+			<!--</div>-->
+			<p class="close">
+			<img src="picture/xingqingyeguanbi.png" alt="">
+			</p>
+		</div>
+		<!--验证提示框-->
+		<div class="refund-prompt"></div>
+		<!--点击图片出来的模态显示大图-->
+		<div class="comment-model">
+			<div class="swiper-container" id="imgs">
+				<div class="swiper-wrapper"></div>
+				<div class="swiper-pagination" style="font-size:3rem;"></div>
+			</div>
+		</div>
+	<!--点击地址出来的弹框-->
+	<div class="seckilldetails-all-address">
+		<!--顶部-->
+		<div class="seckilldetails-all-address-top">
+			<img src="picture/xingqingyeguanbi.png" alt="" class="seckilldetails-all-address-top-img"/>
+			<span>选择配送地址</span>
+		</div>
+		<!--地址区-->
+		<div class="seckilldetails-all-address-container">
+			<div class="seckilldetails-all-address-details">
+				<!--配送列表-->
+				<div class="seckilldetails-all-address-details-peisong">
+					<!--<div class="seckilldetails-all-address-details-list">-->
+						<!--<img src="picture/seckilldetailsweixuanzhong.png" alt="">-->
+						<!--<span>北京市朝阳区望京SOHO塔2 C座-0310</span>-->
+					<!--</div>-->
+					<!--<div class="seckilldetails-all-address-details-list">-->
+						<!--<img src="picture/seckilldetailsxuanzhong.png" alt="">-->
+						<!--<span class="active">北京市朝阳区望京SOHO塔2 C座-0310</span>-->
+					<!--</div>-->
+				</div>
+				<!--不配送列表-->
+				<div class="seckilldetails-all-address-details-bupeisong">
+					<!--<div class="seckilldetails-all-address-details-list">-->
+						<!--<img src="picture/seckilldetailsweixuanzhong.png" alt="">-->
+						<!--<span class="seckilldetails-all-address-details-bupeisong-span">北京市朝阳区望京SOHO塔2 C座-0310</span>-->
+					<!--</div>-->
+					<!--<div class="seckilldetails-all-address-details-list">-->
+						<!--<img src="picture/seckilldetailsweixuanzhong.png" alt="">-->
+						<!--<span class="seckilldetails-all-address-details-bupeisong-span">北京市朝阳区望京SOHO塔2 C座-0310</span>-->
+					<!--</div>-->
+				</div>
+			</div>
+		</div>
+		<!--底部添加地址按钮-->
+		<div class="seckilldetails-all-address-bottom-all">
+			<div class="seckilldetails-all-address-bottom">
+				<img src="picture/seckilldetailsaddadress.png" alt="" class="seckilldetails-all-address-bottom-img"/>
+				<span class="seckilldetails-all-address-bottom-span">选择其它地址</span>
+			</div>
+		</div>
+	</div>
+	<!--新增联系人-->
+	<div class="add-contact-people-container">
+		<!--店铺名-->
+		<span class="add-contact-people-shopName">大鱼优品</span>
+		<div class="add-contact-people-jiantou-box" style="display:inline-block">
+			<img src="picture/addpeoplejiantou@2x.png" alt="" class="add-contact-people-jiantou"/>
+		</div>
+		<img src="picture/ooooo.png" alt="" class="add-contact-people-icon" />
+	</div>
+
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/selfsupport.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/s-seckilldetails.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <!--<script src="js/addrefereecode.js" type="text/javascript" charset="utf-8"></script>-->-->
+		<!--地址三联动-->
+		<script src="js/iosselect.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/areadata_v2.js"></script>
+		<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var userId=sessionStorage.getItem("userId");
+			var nickname=sessionStorage.getItem("nickname");
+			if(userId){
+                userId=sessionStorage.getItem("userId");
+			}else{
+                userId="";
+			}
+			if(nickname){
+                nickname=sessionStorage.getItem("nickname");
+			}else{
+                nickname="";
+			}
+			var pid=GetQueryString("pid");
+            NTKF_PARAM = {
+                siteid: 'kf_10503', //平台基础id
+                settingid: 'kf_10503_1542162454656', //Ntalker分配的缺省客服组id，平台客服组用平台的settingid，商家客服组用商家的settingid
+                uid: userId, //用户id
+                uname: nickname,//用户名
+                isvip:"0",                           //是否为vip用户，0代表非会员，1代表会员，取值显示到小能客户端上
+                userlevel:"0",                       //网站自定义会员级别，0-N，可根据选择判断，取值显示到小能客户端上
+                erpparam:"erp",                        //erpparam为erp功能的扩展字段，可选，购买erp功能后用于erp功能集成
+                itemid:pid,                         //(必填)商品ID
+                itemparam:""                         //(选填)itemparam为商品接口扩展字段，用于商品接口特殊要求集成
+            }
+		</script>
+		<script type="text/javascript" src="js/ntkfstat.js" charset="utf-8"></script>
+		<script type="text/javascript">
+            $(function(){
+                var productId;
+                if(GetQueryString("pid")!=undefined){
+                    productId=GetQueryString("pid");
+//                console.log("url里的："+productId);
+                }else{
+                    productId=sessionStorage.getItem("pid");
+//                console.log("sesseion里放的："+productId);
+                }
+
+                //遮罩层的实现
+                var winW=$(window).width();
+                var winH=$(window).height();
+                //console.log( winH);
+                // console.log(winW,winH);
+                $(".productDetailImg-all-model").width(winW);
+                $(".productDetailImg-all-model").height(winH);
+
+                $.ajax({
+                    type: "post",
+                    url: "/me/product-detailImage",
+                    async: true,
+                    data: {productId: productId},
+                    success: function (result) {
+//                    console.log(result);
+                        if(result.state==0){
+                            var html='';
+                            for(var i=0;i<result.data.length;i++){
+                                html+='<div class="productDetailImg-img">';
+                                html+='<img src="'+result.data[i]+'" alt=""/>';
+                                html+='</div>';
+                            }
+                            $(".productDetailImg-all").html(html);
+                        }else{
+                            console.log(result.stateMsg);
+                        }
+                    }
+                });
+                // 点击大图片后消失回到详情页
+                $(".productDetailImg-all-model img").on("click",function(){
+                    $(this).parent().parent().hide();
+                    //消失后取消事件
+                    $("body").height($(document).height()).css("overflow","auto");
+                });
+
+                // 点击每张小图进入大图
+                $(".productDetailImg-all").on("click","img",function(){
+                    var img=$(this).attr("src");
+                    $(".productDetailImg-all-model").show().find("img").attr("src",img);
+                    //模态框出现底部页面不能滑动
+                    $("body").height($(window).height()).css("overflow","hidden");
+                });
+
+            });
+
+            //        $(".seckilldetails-details-text").on("click",function(){
+            //            location.href="communityOnlineImgRule.html";
+            //		})
+
+		</script>
+		<!--腾讯统计-->
+		<script src="js/count.js"></script>
+	</body>
+</html>

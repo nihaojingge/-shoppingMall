@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分类</title>
+	<style>
+		/* 设置滚动条的样式 */
+		::-webkit-scrollbar {
+			width: 0;
+			height: 0px;
+		}
+		/* 滚动槽 ,滚动条的滚道*/
+		::-webkit-scrollbar-track {
+			-webkit-box-shadow: inset 0 0 6px transparent;
+			border-radius: 10px;
+		}
+		/* 滚动条滑块 ，滚动条里面的小滑块*/
+		::-webkit-scrollbar-thumb {
+			border-radius: 10px;
+			background: transparent;
+			-webkit-box-shadow: inset 0 0 6px transparent;
+		}
+		::-webkit-scrollbar-thumb:window-inactive {
+			background: transparent;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/frist.css" />
+	<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+</head>
+<body>
+
+<div class="classification-all">
+	<div class="classification-top">
+		<img src="picture/ic_h5_003.png" alt=""  onclick="javascript:history.back(-1)">
+		<p class="classification-top-p"></p>
+	</div>
+	<!--一级分类-->
+	<div class="classification-left">
+		<!--<p class="classification-left-p classification-left-p-color">热门推荐</p>-->
+		<!--<p class="classification-left-p">热门推荐</p>-->
+		<!--<p class="classification-left-p">热门推荐</p>-->
+		<!--<p class="classification-left-p">热门推荐</p>-->
+		<span class="classification-left-span"></span>
+	</div>
+	<!--二三级分类-->
+	<div class="classification-right">
+		<!--<div class="classification-right-box">-->
+		<!--&lt;!&ndash;标题&ndash;&gt;-->
+		<!--<p class="classification-right-box-p">-->
+		<!--<span class="classification-right-box-p-span1"></span>-->
+		<!--<span class="classification-right-box-p-span2">女士上衣</span>-->
+		<!--<span class="classification-right-box-p-span1"></span>-->
+		<!--</p>-->
+		<!--&lt;!&ndash;图片&ndash;&gt;-->
+		<!--<div class="classification-right-box-div">-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--</div>-->
+
+		<!--</div>-->
+		<!--<div class="classification-right-box">-->
+		<!--&lt;!&ndash;标题&ndash;&gt;-->
+		<!--<p class="classification-right-box-p">-->
+		<!--<span class="classification-right-box-p-span1"></span>-->
+		<!--<span class="classification-right-box-p-span2">女士上衣</span>-->
+		<!--<span class="classification-right-box-p-span1"></span>-->
+		<!--</p>-->
+		<!--&lt;!&ndash;图片&ndash;&gt;-->
+		<!--<div class="classification-right-box-div">-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--<div class="classification-right-box-div-img">-->
+		<!--<img src="" alt="" class="classification-right-box-div-img-img">-->
+		<!--<p class="classification-right-box-div-img-p">羽绒服</p>-->
+		<!--</div>-->
+		<!--</div>-->
+
+		<!--</div>-->
+	</div>
+</div>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/classify.js" type="text/javascript" charset="utf-8"></script>
+ <!--<script src="js/addrefereecode.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript">
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function() {
+                window.clientWidth = docEl.clientWidth;
+                if(!window.clientWidth) return;
+                docEl.style.fontSize = 10 * (window.clientWidth / 750) + 'px';
+                window.base = 10 * (window.clientWidth / 750);
+            };
+
+        if(!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+    /*获取URL参数方法*/
+    function GetQueryString(name) {
+        /*定义正则，用于获取相应参数*/
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        /*字符串截取，获取匹配参数值*/
+        var r = window.location.search.substr(1).match(reg);
+        /*但会参数值*/
+        if(r != null) return decodeURI(r[2]);
+        return null;
+    }
+</script>
+<!--腾讯统计-->
+<script src="js/count.js"></script>
+</body>
+
+</html>

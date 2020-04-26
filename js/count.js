@@ -1,0 +1,1 @@
+var _mtac={performanceMonitor:1,senseQuery:1};!function(){var e=document.createElement("script");e.src="//pingjs.qq.com/h5/stats.js?v2.0.4",e.setAttribute("name","MTAH5"),e.setAttribute("sid","500650125"),e.setAttribute("cid","500650234");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();

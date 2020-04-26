@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="user-scalable=no">
+		<title>晒单领现金</title>
+		<style>
+			body{
+				padding:0;
+				margin:0;
+			}
+			.productDetailImg-all{
+				width:75rem;
+			}
+			.productDetailImg-img{
+				width:75rem;
+				margin:0;
+				padding:0;
+			}
+			.productDetailImg-img img{
+				width:75rem;
+				display:block;
+			}
+			.productDetailImg-product-box{
+				width:75rem;
+				background:#ffc451 ;
+			}
+			.productDetailImg-product-box-item{
+				display:inline-block;
+			}
+			.productDetailImg-product-box-item img{
+				width:24.66rem;
+				height:34.5rem;
+			}
+			.Look-at-more{
+				text-align:center;
+			}
+			.Look-at-more img{
+				width:75rem;
+				height:11.6rem;
+			}
+			.productDetailImg-product-box-title{
+				text-align: center;
+			}
+			.productDetailImg-product-box-title img{
+				width:28rem;
+				height:3.5rem;
+			}
+		</style>
+		<!--获取微信权限,引入WX的js-->
+		<script src="js/jweixin-1.2.0.js"></script>
+		<script src="js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8" ></script>
+	</head>
+	<body style="background:#ffc451">
+	<!--放图容器-->
+	<div class="productDetailImg-all">
+		<!--&lt;!&ndash;每张图&ndash;&gt;-->
+		<div class="productDetailImg-img">
+			<img src="picture/cashincash_01.jpg" alt="">
+		</div>
+		<!--放商品的容器-->
+		<div class="productDetailImg-product-box">
+			<!--标题-->
+			<div class="productDetailImg-product-box-title">
+				<img src="picture/huodongshangpin@2x.png" alt="">
+			</div>
+			<div>
+				<!--全网-->
+				<!--<div class="productDetailImg-product-box-item">-->
+					<!--<a href="https://s.click.taobao.com/qU6UNKw"><img src="picture/huawei@2x.png" alt=""></a>-->
+				<!--</div>-->
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="2683">
+					<img src="picture/img1.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3542">
+					<img src="picture/img2.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3550">
+					<img src="picture/img3.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="2889">
+					<img src="picture/img4.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="2976">
+					<img src="picture/img5.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3035">
+					<img src="picture/img6.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3594">
+					<img src="picture/img7.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3119">
+					<img src="picture/img8.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="2477">
+					<img src="picture/img9.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="3438">
+					<img src="picture/img10.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="1887">
+					<img src="picture/img11.jpg" alt="">
+				</div>
+				<div class="productDetailImg-product-box-item productDetailImg-product-box-items" data-pid="1736">
+					<img src="picture/img12.jpg" alt="">
+				</div>
+			</div>
+			<!--按钮-->
+			<div class="Look-at-more">
+				<img src="picture/lookatmore@2x.png" alt="">
+			</div>
+		</div>
+		<div class="productDetailImg-img">
+			<img src="picture/cashincash_03.jpg" alt="">
+		</div>
+	</div>
+	</body>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="js/jquery.min.js"></script>-->
+	<script src="js/selfsupport.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			//浏览器信息
+			var ua = navigator.userAgent.toLowerCase();
+			//  点击商品到商品详情
+			$(".productDetailImg-product-box-items").on("click",function(){
+				if(ua.match(/MicroMessenger/i)=="micromessenger"){
+					location.href="s-seckilldetails.html?random="+new Date().getTime()+"&pid="+$(this).attr("data-pid");
+				}else{
+					alert($(this).attr("data-pid")+"APP5进入商品详情");//与APP交互传pid
+				}
+			});
+		  //	点击"查看更多"到秒杀页面
+			$(".Look-at-more img").on("click",function(){
+				if(ua.match(/MicroMessenger/i)=="micromessenger"){
+					location.href="s-timeSeckill.html?random="+new Date().getTime();
+				}else{
+					alert("APP6GoToKillDetails");//与APP交互传pid
+				}
+			});
+			rank();
+            //调用ready，保证回来的先后数据一致
+            wx.ready(function () {
+                share("抢购精品,一触即发。","疯狂抢购进行中...件件是精品，样样随你心！我们等你哦！-大鱼优品",dyyp.DOMAIN+"/CashInCash.html?r="+new Date().getTime(),dyyp.DOMAIN+"/img/CashInCashImg/share.jpg");
+            });
+        })
+	</script>
+</html>
